@@ -1,0 +1,67 @@
+@import "addons";
+@import "../valo/valo";
+@import "../valo/components/menubar";
+@import "../valo/components/table";
+
+$v-app-background-color: #e7ebf2;
+$v-background-color: #3b5998;
+
+$v-font-size: 15px;
+$v-table-header-font-size: $v-font-size;
+$v-table-background-color: $v-app-background-color;
+$v-layout-margin-top: $v-font-size;
+$v-layout-margin-right: $v-font-size;
+$v-layout-margin-bottom: $v-font-size;
+$v-layout-margin-left: $v-font-size;
+
+
+/*
+$v-focus-style: 0 0 3px 2px $v-focus-color;
+$v-border-radius: 10px;
+$v-bevel: inset 0 1px 2px v-tint, inset 0 0 1px (v-tint 0.1);
+$v-bevel-depth: 40%;
+$v-shadow: 0 0 0 3px rgba(0,0,0,0.32), 0 1px 0 3px rgba(255,255,255,0.14);
+$v-textfield-bevel: inset 0 2px 2px v-shade;
+$v-textfield-shadow: $v-shadow;
+$v-overlay-shadow: 0 0 0 3px (v-shade 8), 0 5px 10px (v-shade 4);
+$v-component-group-spacing: 6px;
+*/
+
+// Optimize the CSS output
+/*
+$v-included-components: remove($v-included-components, accordion);
+$v-included-components: remove($v-included-components, colorpicker);
+$v-included-components: remove($v-included-components, grid);
+$v-included-components: remove($v-included-components, popupview);
+$v-included-components: remove($v-included-components, progressbar);
+$v-included-components: remove($v-included-components, slider);
+$v-included-components: remove($v-included-components, splitpanel);
+$v-included-components: remove($v-included-components, tree);
+$v-included-components: remove($v-included-components, treetable);
+$v-included-components: remove($v-included-components, twincolselect);
+*/
+
+@include addons;
+@include valo;
+
+// Valo customization
+.v-menubar { border-radius:0; }
+.v-menubar:focus:after { box-shadow:0 0 0 0px; }
+.v-menubar-popup { margin-top: 0 !important; height: auto !important; background-color: $v-background-color; color: valo-font-color($v-background-color); }
+
+.v-tabsheet { padding: 0 10px; .v-tabsheet-content{ width: 100% !important; } }
+
+.v-table-row, .v-table-row-odd { color: valo-font-color($v-app-background-color); }
+.v-table-body { background-color: $v-app-background-color; }
+
+.v-Notification-humanized, .v-Notification-warning, .v-Notification-error { .v-Notification-description { display:block; margin-left:0px !important; } }
+
+.mytheme .v-checkbox > input ~ label:before { background: $v-app-background-color !important; box-shadow: none; }
+.mytheme .v-checkbox > input:checked ~ label:after { color: $v-background-color !important; }
+
+.v-datefield-popup .v-datefield-calendarpanel-day{ background: $v-app-background-color !important; }
+.v-datefield-popup .v-datefield-calendarpanel-day-today { color: $v-background-color; }
+
+//Custom styles
+.full-width { width:100%; }
+.form { max-width: 1200px; }
