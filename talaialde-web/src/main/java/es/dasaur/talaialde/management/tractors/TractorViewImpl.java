@@ -64,7 +64,8 @@ public class TractorViewImpl
         Tractor tractor = (Tractor) itemId;
         switch(propertyId.toString()){
         case Tractor.PROP_VI_EXPIRY:
-            value = Formats.DATE.format(tractor.getVehicleInspectionExpiry());
+            value = tractor.getVehicleInspectionExpiry() == null ? "" :
+                Formats.DATE.format(tractor.getVehicleInspectionExpiry());
             break;
         default:
             value = null;

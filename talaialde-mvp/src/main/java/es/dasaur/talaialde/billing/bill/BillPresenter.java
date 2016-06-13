@@ -27,7 +27,7 @@ public interface BillPresenter
     
     byte[] getPdf(Client client, Route route, Tractor tractor, Date startDate,
             Date endDate, List<Line> lines, String vat,
-            String totalWithCurrency, String logoPath, String billN)
+            String totalWithCurrency, String logoPath, String billN, Date date)
                     throws JRException;
 
 }

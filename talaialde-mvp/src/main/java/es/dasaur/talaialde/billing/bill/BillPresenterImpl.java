@@ -47,10 +47,11 @@ public class BillPresenterImpl
     @Override
     public byte[] getPdf(Client client, Route route, Tractor tractor,
             Date startDate, Date endDate, List<Line> lines, String vat,
-            String totalWithCurrency, String logoPath, String billN) 
+            String totalWithCurrency, String logoPath, String billN,
+            Date date) 
                     throws JRException {
         return PdfUtils.getBill(client, route, tractor, startDate, endDate,
-                lines, vat, totalWithCurrency, logoPath, billN);
+                lines, vat, totalWithCurrency, logoPath, billN, date);
     }
 
 }

@@ -41,7 +41,7 @@ public class PdfUtils {
     
     public static byte[] getBill(Client client, Route route, Tractor tractor, 
             Date startDate, Date endDate, List<Line> lines, String vat,
-            String totalWithCurrency, String logoPath, String billN) throws JRException {
+            String totalWithCurrency, String logoPath, String billN, Date date) throws JRException {
         JRDataSource dataSource = new JRBeanCollectionDataSource(lines);
         
         Map<String, Object> parameters = new HashMap<String, Object>();
@@ -71,6 +71,7 @@ public class PdfUtils {
         parameters.put("tractor", tractor);
         parameters.put("startDate", startDate);
         parameters.put("endDate", endDate);
+        parameters.put("date", date);
         parameters.put("billN", billN);
         
         BigDecimal subtotal = lines.stream().map(Line::getValue)

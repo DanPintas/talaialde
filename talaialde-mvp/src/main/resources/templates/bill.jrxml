@@ -30,6 +30,7 @@
 	<parameter name="vat_value" class="java.lang.String"/>
 	<parameter name="total" class="java.lang.String"/>
 	<parameter name="vat" class="java.lang.String"/>
+	<parameter name="date" class="java.util.Date"/>
 	<field name="lineDate" class="java.util.Date"/>
 	<field name="client" class="es.dasaur.talaialde.management.clients.Client"/>
 	<field name="route" class="es.dasaur.talaialde.management.routes.Route"/>
@@ -209,7 +210,7 @@
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["FECHA DE FACTURA: " + new SimpleDateFormat("dd 'de' MMMM 'de' yyyy").format(new Date())]]></textFieldExpression>
+				<textFieldExpression><![CDATA["FECHA DE FACTURA: " + new SimpleDateFormat("dd 'de' MMMM 'de' yyyy").format($P{date} == null ? new Date() : $P{date})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement positionType="Float" x="0" y="291" width="555" height="20" uuid="b262ed11-d4a8-487e-bff5-d2702812ed5e"/>

@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.server.FontAwesome;
@@ -65,6 +66,8 @@ public class BillViewImpl
     private Table table;
     
     private TextField billN;
+
+    private DateField date;
 
     private TextField vat;
 
@@ -130,6 +133,14 @@ public class BillViewImpl
         billN.setWidth("100%");
         billN.setNullRepresentation("");
         
+        date = new DateField(getMessage(Messages.PROP_DATE));
+        date.setResolution(Resolution.DAY);
+        date.setDateFormat(Formats.DATE_FORMAT);
+        date.setConversionError(getMessage(Messages.ERROR_CONVERSION_DATE));
+        date.setWidth("100%");
+        date.setValue(new Date());
+        
+        
         vat = new TextField(getMessage(Messages.PROP_VAT));
         vat.setWidth("100%");
         vat.setNullRepresentation("");
@@ -158,10 +169,11 @@ public class BillViewImpl
         searchCriteria.forEach(c -> searchCriteria.setComponentAlignment(
                 c, Alignment.BOTTOM_CENTER));
         
-        HorizontalLayout actions = new HorizontalLayout(billN, vat, total, btPdf);
+        HorizontalLayout actions = new HorizontalLayout(billN, date, vat, total, btPdf);
         actions.setWidth("100%");
         actions.setSpacing(true);
-        actions.setExpandRatio(billN, 1);
+        actions.setExpandRatio(billN, 2);
+        actions.setExpandRatio(date, 1);
         actions.setExpandRatio(vat, 1);
         actions.setExpandRatio(total, 1);
         actions.forEach(c -> actions.setComponentAlignment(
@@ -278,7 +290,8 @@ public class BillViewImpl
             List<Line> lines = presenter().getLines((Client) client.getValue(), 
                     (Route) route.getValue(), (Tractor) tractor.getValue(), 
                     startDate.getValue(), endDate.getValue());
-            lines.forEach(l -> l.setValue(l.getAmount().multiply(getFee(l))));
+            lines.forEach(l -> l.setValue(l.getAmount().multiply(
+                    Optional.ofNullable(getFee(l)).orElse(BigDecimal.ZERO))));
             refreshContainer(lines);
             calculateLinesSum(lines);
             calculateBillTotal();
@@ -327,7 +340,8 @@ public class BillViewImpl
                         vat.getValue(), 
                         total.getValue(), 
                         rutaLogo,
-                        billN.getValue()))) {
+                        billN.getValue(),
+                        date.getValue()))) {
             if(btPdf.getExtensions().isEmpty()){
                 StreamResource res = new StreamResource(() -> bais, "Factura.pdf");
                 res.setMIMEType("application/pdf");
