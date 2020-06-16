@@ -1,6 +1,7 @@
 package es.dasaur.talaialde.main;
 
 import es.dasaur.mvp.Presenter;
+import es.dasaur.mvp.View;
 
 public interface MainPresenter extends Presenter<MainService, MainView> {
 
@@ -10,5 +11,7 @@ public interface MainPresenter extends Presenter<MainService, MainView> {
     void closePresenter(String titulo);
 
     void logout();
+
+    View<?> getView(String title);
 
 }

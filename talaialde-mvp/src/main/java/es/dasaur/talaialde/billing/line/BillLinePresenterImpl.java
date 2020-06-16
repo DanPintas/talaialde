@@ -16,7 +16,12 @@ public class BillLinePresenterImpl
     
     @Override
     public Line saveLine(Line c) {
-        return model().saveLine(c);
+        boolean isNew = c.getId() == null;
+        Line saved = model().saveLine(c);
+        if(!isNew) {
+            getMainPresenter().view().closeView(getTitle());
+        }
+        return saved;
     }
 
     @Override
@@ -32,6 +37,11 @@ public class BillLinePresenterImpl
     @Override
     public List<Tractor> getTractors() {
         return model().getTractors();
+    }
+
+    @Override
+    public void setLine(Line line) {
+        view().setLine(line);
     }
 
 }

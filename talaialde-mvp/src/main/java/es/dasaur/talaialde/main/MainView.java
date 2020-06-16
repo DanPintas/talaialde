@@ -8,4 +8,6 @@ public interface MainView extends View<MainPresenter> {
 
     void show(View<?> vistaAbierta);
 
+    void closeView(String title);
+
 }

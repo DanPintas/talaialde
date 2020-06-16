@@ -1,4 +1,4 @@
-package es.dasaur.talaialde.billing.bill;
+package es.dasaur.talaialde.billing.freebill;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.vaadin.data.util.BeanItemContainer;
@@ -28,46 +27,37 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 import es.dasaur.annotations.View;
-import es.dasaur.talaialde.billing.line.Line;
+import es.dasaur.talaialde.billing.freeline.FreeLine;
 import es.dasaur.talaialde.constants.ConstantesRecursos;
 import es.dasaur.talaialde.constants.Formats;
 import es.dasaur.talaialde.constants.Messages;
 import es.dasaur.talaialde.management.clients.Client;
-import es.dasaur.talaialde.management.routes.Route;
-import es.dasaur.talaialde.management.tractors.Tractor;
 import es.dasaur.vaadin.components.ConfirmWindow;
 import es.dasaur.vaadin.mvp.VaadinAbstractView;
 import es.dasaur.vaadin.utils.NotificationUtils;
 import net.sf.jasperreports.engine.JRException;
 
 @View
-public class BillViewImpl 
-        extends VaadinAbstractView<BillPresenter>
-        implements BillView {
+public class FreeBillViewImpl 
+        extends VaadinAbstractView<FreeBillPresenter>
+        implements FreeBillView {
 
     private static final long serialVersionUID = 8347090806955125286L;
 
-    private static final String FEE = "fee";
     private static final String ACTIONS = "actions";
     private static final String EUROS = " €";
 
-    private BeanItemContainer<Line> container;
+    private BeanItemContainer<FreeLine> container;
     
     private static final List<Object> VISIBLE_COLUMNS = Arrays.asList(
-            Line.PROP_CHECKED,
-            Line.PROP_DATE,
-            Line.PROP_CLIENT,
-            Line.PROP_ROUTE,
-            Line.PROP_TRACTOR,
-            Line.PROP_PRODUCT,
-            Line.PROP_AMOUNT,
-            FEE,
-            Line.PROP_VALUE,
+            FreeLine.PROP_CHECKED,
+            FreeLine.PROP_DATE,
+            FreeLine.PROP_CLIENT,
+            FreeLine.PROP_PRODUCT,
+            FreeLine.PROP_VALUE,
             ACTIONS);
 
     private ComboBox client;
-    private ComboBox route;
-    private ComboBox tractor;
     private DateField startDate;
     private DateField endDate;
 
@@ -92,14 +82,6 @@ public class BillViewImpl
         client.setFilteringMode(FilteringMode.CONTAINS);
         client.setWidth("100%");
         
-        route = new ComboBox(getMessage(Messages.PROP_ROUTE));
-        route.setFilteringMode(FilteringMode.CONTAINS);
-        route.setWidth("100%");
-        
-        tractor = new ComboBox(getMessage(Messages.PROP_TRACTOR));
-        tractor.setFilteringMode(FilteringMode.CONTAINS);
-        tractor.setWidth("100%");
-        
         startDate = new DateField(getMessage(Messages.PROP_DATE));
         startDate.setResolution(Resolution.DAY);
         startDate.setDateFormat(Formats.DATE_FORMAT);
@@ -114,7 +96,7 @@ public class BillViewImpl
         endDate.setWidth("100%");
         endDate.setValue(getLastDayOfLastMonth());
 
-        container = new BeanItemContainer<>(Line.class);
+        container = new BeanItemContainer<>(FreeLine.class);
         table = new Table();
         table.setContainerDataSource(container);
         table.setSortEnabled(false);
@@ -127,11 +109,7 @@ public class BillViewImpl
                 "",
                 getMessage(Messages.PROP_DATE),
                 getMessage(Messages.PROP_CLIENT),
-                getMessage(Messages.PROP_ROUTE),
-                getMessage(Messages.PROP_TRACTOR),
-                getMessage(Messages.PROP_PRODUCT),
-                getMessage(Messages.PROP_AMOUNT), 
-                getMessage(Messages.PROP_FEE),
+                "Concepto",
                 getMessage(Messages.PROP_VALUE),
                 "");
         table.setFooterVisible(true);
@@ -171,12 +149,10 @@ public class BillViewImpl
         btPdf.addClickListener(e -> exportPdf());
         
         HorizontalLayout searchCriteria = new HorizontalLayout(
-                client, route, tractor, startDate, endDate, btSearch, btRefresh);
+                client, startDate, endDate, btSearch, btRefresh);
         searchCriteria.setWidth("100%");
         searchCriteria.setSpacing(true);
         searchCriteria.setExpandRatio(client, 1);
-        searchCriteria.setExpandRatio(route, 2);
-        searchCriteria.setExpandRatio(tractor, 1);
         searchCriteria.setExpandRatio(startDate, 1);
         searchCriteria.setExpandRatio(endDate, 1);
         searchCriteria.forEach(c -> searchCriteria.setComponentAlignment(
@@ -222,44 +198,32 @@ public class BillViewImpl
 
     private void setTableColumns() {
         table.setVisibleColumns(VISIBLE_COLUMNS.toArray());
-        table.setColumnWidth(Line.PROP_CHECKED, 40);
-        table.setColumnWidth(Line.PROP_CHECKED, 100);
-        table.setColumnAlignment(FEE, Align.RIGHT);
-        table.setColumnAlignment(Line.PROP_VALUE, Align.RIGHT);
+        table.setColumnExpandRatio(FreeLine.PROP_DATE, 1);
+        table.setColumnExpandRatio(FreeLine.PROP_CLIENT, 2);
+        table.setColumnExpandRatio(FreeLine.PROP_PRODUCT, 2);
+        table.setColumnExpandRatio(FreeLine.PROP_VALUE, 1);
+        table.setColumnWidth(FreeLine.PROP_CHECKED, 40);
+        table.setColumnWidth(FreeLine.PROP_CHECKED, 100);
+        table.setColumnAlignment(FreeLine.PROP_VALUE, Align.RIGHT);
     }
     
     private Object generateColumn(Object itemId, Object propertyId) {
         Object value;
-        Line line = (Line) itemId;
+        FreeLine line = (FreeLine) itemId;
         switch(propertyId.toString()){
-        case Line.PROP_CHECKED:
+        case FreeLine.PROP_CHECKED:
             value = createCheck(line);
             break;
-        case Line.PROP_DATE:
+        case FreeLine.PROP_DATE:
             value = Formats.DATE.format(line.getLineDate());
             break;
-        case Line.PROP_CLIENT:
+        case FreeLine.PROP_CLIENT:
             value = line.getClient().getName();
             break;
-        case Line.PROP_ROUTE:
-            value = String.format("%s - %s", 
-                    line.getRoute().getOrigin(), line.getRoute().getDestiny());
-            break;
-        case Line.PROP_TRACTOR:
-            value = line.getTractor().getPlate();
-            break;
-        case Line.PROP_PRODUCT:
+        case FreeLine.PROP_PRODUCT:
             value = line.getProduct();
             break;
-        case Line.PROP_AMOUNT:
-            value = line.getAmount() + " " + getMessage(
-                    "PROP_"+line.getLineType().toString());
-            break;
-        case FEE:
-            value = getFee(line) == null ? null :
-                Formats.MONEY.format(getFee(line).doubleValue()) + EUROS;
-            break;
-        case Line.PROP_VALUE:
+        case FreeLine.PROP_VALUE:
             value = Formats.MONEY.format(line.getValue().doubleValue()) + EUROS;
             break;
         case ACTIONS:
@@ -271,39 +235,20 @@ public class BillViewImpl
         return value;
     }
 
-    private Object createCheck(Line line) {
+    private Object createCheck(FreeLine line) {
         CheckBox check = new CheckBox();
         check.setValue(true);
         check.addValueChangeListener(e -> setChecked(line, check.getValue()));
         return check;
     }
 
-    private void setChecked(Line line, Boolean checked) {
+    private void setChecked(FreeLine line, Boolean checked) {
         line.setChecked(checked);
         calculateLinesSum(container.getItemIds());
         calculateBillTotal();
     }
 
-    private BigDecimal getFee(Line line) {
-        BigDecimal fee;
-        switch(line.getLineType()){
-        case HOUR:
-            fee = line.getRoute().getHourFee();
-            break;
-        case TON:
-            fee = line.getRoute().getTonFee();
-            break;
-        case TRIP:
-            fee = line.getRoute().getTripFee();
-            break;
-        default:
-            fee = null;
-            break;
-        }
-        return fee;
-    }
-
-    private Object getActions(Line line) {
+    private Object getActions(FreeLine line) {
         Button edit = new Button(FontAwesome.EDIT);
         edit.addClickListener(e -> openEditor(line));
         
@@ -314,11 +259,11 @@ public class BillViewImpl
         return actions;
     }
 
-    private void openEditor(Line line) {
+    private void openEditor(FreeLine line) {
         presenter().openEditor(line);
     }
 
-    private void confirmDelete(Line line) {
+    private void confirmDelete(FreeLine line) {
         ConfirmWindow.show(
                 getMessage(Messages.PROMPT_DELETE), 
                 getMessage(Messages.PROMPT_DELETE_DESC), 
@@ -327,7 +272,7 @@ public class BillViewImpl
                 () -> delete(line));
     }
 
-    private void delete(Line line) {
+    private void delete(FreeLine line) {
         presenter().deleteLine(line);
         search();
     }
@@ -338,16 +283,6 @@ public class BillViewImpl
         presenter().getClients().forEach(this::addClient);
         client.select(selectedClient);
         
-        Route selectedRoute = (Route) route.getValue();
-        route.removeAllItems();
-        presenter().getRoutes().forEach(this::addRoute);
-        route.select(selectedRoute);
-        
-        Tractor selectedTractor = (Tractor) tractor.getValue();
-        tractor.removeAllItems();
-        presenter().getTractors().forEach(this::addTractor);
-        tractor.select(selectedTractor);
-        
         search();
     }
 
@@ -355,11 +290,8 @@ public class BillViewImpl
         if (!startDate.isValid() || !endDate.isValid()) {
             NotificationUtils.showWarning(getMessage(Messages.ERROR_CONVERSION_DATE));
         } else if (startDate.getValue() != null && endDate.getValue() != null) {
-            List<Line> lines = presenter().getLines((Client) client.getValue(), 
-                    (Route) route.getValue(), (Tractor) tractor.getValue(), 
+            List<FreeLine> lines = presenter().getLines((Client) client.getValue(),  
                     startDate.getValue(), endDate.getValue());
-            lines.forEach(l -> l.setValue(l.getAmount().multiply(
-                    Optional.ofNullable(getFee(l)).orElse(BigDecimal.ZERO))));
             refreshContainer(lines);
             calculateLinesSum(lines);
             calculateBillTotal();
@@ -368,17 +300,17 @@ public class BillViewImpl
         }
     }
 
-    private void refreshContainer(List<Line> lines) {
-        container = new BeanItemContainer<>(Line.class);
+    private void refreshContainer(List<FreeLine> lines) {
+        container = new BeanItemContainer<>(FreeLine.class);
         container.addAll(lines);
         table.setContainerDataSource(container);
         setTableColumns();
     }
 
-    private void calculateLinesSum(List<Line> lines) {
-        linesSum = lines.stream().filter(Line::isChecked).map(Line::getValue)
+    private void calculateLinesSum(List<FreeLine> lines) {
+        linesSum = lines.stream().filter(FreeLine::isChecked).map(FreeLine::getValue)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-        table.setColumnFooter(Line.PROP_VALUE, Formats.MONEY.format(
+        table.setColumnFooter(FreeLine.PROP_VALUE, Formats.MONEY.format(
                 linesSum.doubleValue()) + EUROS);
     }
 
@@ -400,12 +332,10 @@ public class BillViewImpl
         try(ByteArrayInputStream bais = new ByteArrayInputStream(
                 presenter().getPdf(
                         (Client) client.getValue(),
-                        (Route) route.getValue(),
-                        (Tractor) tractor.getValue(),
                         startDate.getValue(),
                         endDate.getValue(),
                         container.getItemIds().stream()
-                                .filter(Line::isChecked)
+                                .filter(FreeLine::isChecked)
                                 .collect(Collectors.toList()), 
                         vat.getValue(), 
                         total.getValue(), 
@@ -433,17 +363,6 @@ public class BillViewImpl
     private void addClient(Client item){
         client.addItem(item);
         client.setItemCaption(item, item.getName());
-    }
-
-    private void addRoute(Route item){
-        route.addItem(item);
-        route.setItemCaption(item, String.format(
-                "%s - %s", item.getOrigin(), item.getDestiny()));
-    }
-
-    private void addTractor(Tractor item){
-        tractor.addItem(item);
-        tractor.setItemCaption(item, item.getPlate());
     }
 
 }

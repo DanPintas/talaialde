@@ -21,7 +21,6 @@ import es.dasaur.talaialde.users.LoginService;
 import es.dasaur.talaialde.users.security.LoginErrorException.LoginErrorType;
 
 @Component
-@Scope(value = BeanDefinition.SCOPE_PROTOTYPE)
 public class DbAuthenticationProvider implements AuthenticationProvider {
     
     @Autowired

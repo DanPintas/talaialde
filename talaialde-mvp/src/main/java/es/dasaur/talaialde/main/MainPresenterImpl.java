@@ -52,7 +52,8 @@ public class MainPresenterImpl
         return presenter;
     }
     
-    private View<?> getView(String titulo) {
+    @Override
+    public View<?> getView(String titulo) {
         Presenter<?, ?> presenter = presentersAbiertos.get(titulo);
         return presenter != null ? presenter.view() : null;
     }

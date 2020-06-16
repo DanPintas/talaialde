@@ -120,4 +120,9 @@ public class MainViewImpl
         tabSheet.setSelectedTab(comp);
     }
 
+    @Override
+    public void closeView(String title) {
+        cerrarDetalle(tabSheet, (Component) presenter().getView(title));
+    }
+
 }

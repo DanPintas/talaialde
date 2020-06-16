@@ -30,4 +30,8 @@ public interface BillPresenter
             String totalWithCurrency, String logoPath, String billN, Date date)
                     throws JRException;
 
+    void deleteLine(Line line);
+
+    void openEditor(Line line);
+
 }

@@ -19,4 +19,6 @@ public interface BillLinePresenter
 
     List<Tractor> getTractors();
 
+    void setLine(Line line);
+
 }

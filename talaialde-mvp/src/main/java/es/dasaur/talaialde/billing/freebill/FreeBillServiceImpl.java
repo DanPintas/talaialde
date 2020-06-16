@@ -1,4 +1,4 @@
-package es.dasaur.talaialde.billing.bill;
+package es.dasaur.talaialde.billing.freebill;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -9,37 +9,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.dasaur.talaialde.billing.line.Line;
-import es.dasaur.talaialde.billing.line.LineRepository;
+import es.dasaur.talaialde.billing.freeline.FreeLine;
+import es.dasaur.talaialde.billing.freeline.FreeLineRepository;
 import es.dasaur.talaialde.billing.vat.VatRepository;
 import es.dasaur.talaialde.management.clients.Client;
 import es.dasaur.talaialde.management.clients.ClientRepository;
-import es.dasaur.talaialde.management.routes.Route;
-import es.dasaur.talaialde.management.routes.RouteRepository;
-import es.dasaur.talaialde.management.tractors.Tractor;
-import es.dasaur.talaialde.management.tractors.TractorRepository;
 
 @Service
 @Transactional(readOnly = true)
-public class BillServiceImpl 
-        implements BillService{
+public class FreeBillServiceImpl 
+        implements FreeBillService{
     
     @Autowired
-    private LineRepository repo;
+    private FreeLineRepository repo;
 
     @Autowired
     private ClientRepository clientRepo;
-    @Autowired
-    private RouteRepository routeRepo;
-    @Autowired
-    private TractorRepository tractorRepo;
     
     @Autowired
     private VatRepository vatRepo;
     
     @Override
-    public List<Line> getLines(Client client, Route route, Tractor tractor,
-            Date startDate, Date endDate) {
+    public List<FreeLine> getLines(Client client, Date startDate, Date endDate) {
         Calendar cal = Calendar.getInstance();
         
         cal.setTime(startDate);
@@ -56,8 +47,8 @@ public class BillServiceImpl
         cal.set(Calendar.MILLISECOND, 0);
         Date finishDate = new java.sql.Date(cal.getTimeInMillis());
         
-        List<Line> lines = repo.findByFilters(
-                client, route, tractor, beginDate, finishDate);
+        List<FreeLine> lines = repo.findByFilters(
+                client, beginDate, finishDate);
         lines.forEach(line -> line.setChecked(true));
         
         return lines;
@@ -69,23 +60,13 @@ public class BillServiceImpl
     }
 
     @Override
-    public List<Route> getRoutes() {
-        return routeRepo.findByDeletedFalse();
-    }
-
-    @Override
-    public List<Tractor> getTractors() {
-        return tractorRepo.findByDeletedFalse();
-    }
-
-    @Override
     public BigDecimal getDefaultVat() {
         return vatRepo.findOne(1L).getValue();
     }
 
     @Override
     @Transactional(readOnly = false)
-    public void deleteLine(Line line) {
+    public void deleteLine(FreeLine line) {
         repo.delete(line);
     }
 

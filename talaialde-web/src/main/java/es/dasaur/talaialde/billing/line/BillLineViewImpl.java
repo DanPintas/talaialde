@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.server.FontAwesome;
+import com.vaadin.shared.ui.combobox.FilteringMode;
 import com.vaadin.ui.AbstractField;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -54,6 +55,7 @@ public class BillLineViewImpl extends VaadinAbstractView<BillLinePresenter>
         client.setWidth("100%");
         client.setRequired(true);
         client.setRequiredError(getMessage(Messages.PROMPT_REQUIRED));
+        client.setFilteringMode(FilteringMode.CONTAINS);
         binder.bind(client, Line.PROP_CLIENT);
 
         route = new ComboBox(getMessage(Messages.PROP_ROUTE));
@@ -61,12 +63,14 @@ public class BillLineViewImpl extends VaadinAbstractView<BillLinePresenter>
         route.setRequired(true);
         route.setRequiredError(getMessage(Messages.PROMPT_REQUIRED));
         route.addValueChangeListener(e -> refreshRoute());
+        route.setFilteringMode(FilteringMode.CONTAINS);
         binder.bind(route, Line.PROP_ROUTE);
 
         tractor = new ComboBox(getMessage(Messages.PROP_TRACTOR));
         tractor.setWidth("100%");
         tractor.setRequired(true);
         tractor.setRequiredError(getMessage(Messages.PROMPT_REQUIRED));
+        tractor.setFilteringMode(FilteringMode.CONTAINS);
         binder.bind(tractor, Line.PROP_TRACTOR);
 
         DateField date = new DateField(getMessage(Messages.PROP_DATE));
@@ -274,6 +278,11 @@ public class BillLineViewImpl extends VaadinAbstractView<BillLinePresenter>
     private void addLineType(LineType item) {
         lineType.addItem(item);
         lineType.setItemCaption(item, getMessage("PROP_" + item.toString()));
+    }
+
+    @Override
+    public void setLine(Line line) {
+        binder.setItemDataSource(line);
     }
 
 }

@@ -14,12 +14,6 @@ import es.dasaur.talaialde.users.security.DbAuthenticationProvider;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityContext extends WebSecurityConfigurerAdapter {
-    
-    @Autowired
-    private ObjectPostProcessor<Object> opp;
-    
-    @Autowired
-    private DbAuthenticationProvider authenticationProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -29,7 +23,8 @@ public class WebSecurityContext extends WebSecurityConfigurerAdapter {
     }
     
     @Bean
-    public AuthenticationManager authenticationManager() throws Exception {
+    public AuthenticationManager authenticationManager(
+            ObjectPostProcessor<Object> opp, DbAuthenticationProvider authenticationProvider) throws Exception {
         return new AuthenticationManagerBuilder(opp)
             .authenticationProvider(authenticationProvider)
             .build();
