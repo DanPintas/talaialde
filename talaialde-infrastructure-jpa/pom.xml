@@ -4,12 +4,21 @@
 	<parent>
 		<groupId>es.dasaur</groupId>
 		<artifactId>talaialde</artifactId>
-		<version>1.0.0</version>
+		<version>2.0.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>talaialde-dal</artifactId>
+	<artifactId>talaialde-infrastructure-jpa</artifactId>
 	<name>Talaialde DAL</name>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -20,11 +29,11 @@
 			<groupId>org.apache.commons</groupId>
   			<artifactId>commons-lang3</artifactId>
   		</dependency>
-		
+
 
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.el</groupId>

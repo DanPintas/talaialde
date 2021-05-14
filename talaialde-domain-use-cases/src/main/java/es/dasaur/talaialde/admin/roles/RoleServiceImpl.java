@@ -51,7 +51,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    @Transactional(readOnly=false)
+    @Transactional
     public void saveRelations(Map<JpaRole, List<JpaAuth>> relaciones) {
         List<JpaRelRoleAuth> listaRel = getLRelations(relaciones);
         List<JpaRelRoleAuth> relExistentes = relRepo.findAll();
@@ -59,12 +59,12 @@ public class RoleServiceImpl implements RoleService {
         List<JpaRelRoleAuth> relacionesAEliminar = relExistentes.stream()
                 .filter(r -> doesNotInclude(listaRel, r))
                 .collect(Collectors.toList());
-        relRepo.delete(relacionesAEliminar);
+        relRepo.deleteAll(relacionesAEliminar);
         
         List<JpaRelRoleAuth> relacionesACrear = listaRel.stream()
                 .filter(r -> doesNotInclude(relExistentes, r))
                 .collect(Collectors.toList());
-        relRepo.save(relacionesACrear);
+        relRepo.saveAll(relacionesACrear);
     }
 
     private boolean doesNotInclude(List<JpaRelRoleAuth> list,

@@ -1,6 +1,7 @@
 package es.dasaur.talaialde.admin.users;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,8 +26,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly=false)
     public JpaUser saveUser(JpaUser user) {
-        JpaUser storedUser = user.getId() == null ? null :
-                userRepo.findOne(user.getId());
+        JpaUser storedUser = Optional.ofNullable(user.getId())
+                .flatMap(userRepo::findById)
+                .orElse(null);
         String storedPassword = storedUser == null ? null :
             storedUser.getPassword();
         String password = user.getPassword();

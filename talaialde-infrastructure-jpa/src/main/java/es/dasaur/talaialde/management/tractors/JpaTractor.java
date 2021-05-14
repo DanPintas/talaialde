@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table
+@Table(name = "tractor")
 public class JpaTractor {
     
     public static final String PROP_PLATE = "plate";

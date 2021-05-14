@@ -21,7 +21,7 @@ import es.dasaur.talaialde.management.routes.JpaRoute;
 import es.dasaur.talaialde.management.tractors.JpaTractor;
 
 @Entity
-@Table
+@Table(name = "line")
 public class JpaLine {
     
     public enum LineType { HOUR, TON, TRIP }

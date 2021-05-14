@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames="username"))
+@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames="username"))
 public class JpaUser {
     
     public static final String PROP_USERNAME = "username";

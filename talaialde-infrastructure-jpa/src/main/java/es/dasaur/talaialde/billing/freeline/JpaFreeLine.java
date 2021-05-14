@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 import es.dasaur.talaialde.management.clients.JpaClient;
 
 @Entity
-@Table
+@Table(name = "freeline")
 public class JpaFreeLine {
 
     public static final String PROP_CLIENT = "client";

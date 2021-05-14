@@ -16,7 +16,7 @@ public interface JpaFreeLineRepository
     String PARAM_BEGIN_DATE = "beginDate";
     String PARAM_END_DATE = "endDate";
     
-    String QUERY = "from FreeLine l where " +
+    String QUERY = "from JpaFreeLine l where " +
             "(:" + PARAM_CLIENT + " is null or l.client = :" + PARAM_CLIENT + ") and " +
             "l.lineDate >= :" + PARAM_BEGIN_DATE + " and " +
             "l.lineDate <= :" + PARAM_END_DATE + " " +

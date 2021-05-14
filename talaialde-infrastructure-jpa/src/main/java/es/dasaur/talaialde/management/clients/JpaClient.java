@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.Email;
 import es.dasaur.talaialde.annotations.LongText;
 
 @Entity
-@Table
+@Table(name = "client")
 public class JpaClient {
     
     public static final String PROP_TIN = "tin";

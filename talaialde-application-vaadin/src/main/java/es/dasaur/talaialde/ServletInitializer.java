@@ -2,11 +2,9 @@ package es.dasaur.talaialde;
 
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.context.SecurityContextHolder;
-
-import es.dasaur.talaialde.AppConfig;
 
 public class ServletInitializer extends SpringBootServletInitializer {
     

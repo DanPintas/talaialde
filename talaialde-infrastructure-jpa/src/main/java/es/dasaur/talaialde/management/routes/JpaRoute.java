@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table
+@Table(name = "route")
 public class JpaRoute {
     
     public static final String PROP_ORIGIN = "origin";

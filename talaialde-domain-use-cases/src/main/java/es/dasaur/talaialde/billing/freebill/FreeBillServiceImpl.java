@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import es.dasaur.talaialde.billing.vat.JpaVat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,7 +62,9 @@ public class FreeBillServiceImpl
 
     @Override
     public BigDecimal getDefaultVat() {
-        return vatRepo.findOne(1L).getValue();
+        return vatRepo.findById(1L)
+                .map(JpaVat::getValue)
+                .orElse(null);
     }
 
     @Override

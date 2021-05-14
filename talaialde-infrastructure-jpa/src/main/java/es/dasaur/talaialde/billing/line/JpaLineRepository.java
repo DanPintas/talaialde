@@ -20,7 +20,7 @@ public interface JpaLineRepository
     String PARAM_BEGIN_DATE = "beginDate";
     String PARAM_END_DATE = "endDate";
     
-    String QUERY = "from Line l where " +
+    String QUERY = "from JpaLine l where " +
             "(:" + PARAM_CLIENT + " is null or l.client = :" + PARAM_CLIENT + ") and " +
             "(:" + PARAM_ROUTE + " is null or l.route = :" + PARAM_ROUTE + ") and " +
             "(:" + PARAM_TRACTOR + " is null or l.tractor = :" + PARAM_TRACTOR + ") and " +
