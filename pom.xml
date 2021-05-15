@@ -13,6 +13,7 @@
 		<module>talaialde-infrastructure-jpa</module>
 		<module>talaialde-domain-use-cases</module>
 		<module>talaialde-application-vaadin</module>
+		<module>talaialde-domain-out</module>
 	</modules>
 
 	<properties>
