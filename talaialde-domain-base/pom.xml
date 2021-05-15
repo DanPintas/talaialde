@@ -8,7 +8,6 @@
         <groupId>es.dasaur</groupId>
         <version>2.0.0-SNAPSHOT</version>
     </parent>
-
     <artifactId>talaialde-domain-base</artifactId>
 
 </project>

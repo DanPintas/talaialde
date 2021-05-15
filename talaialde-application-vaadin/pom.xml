@@ -23,6 +23,7 @@
 		<dependency>
 			<groupId>es.dasaur</groupId>
 			<artifactId>talaialde-domain-use-cases</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
@@ -54,23 +55,12 @@
 
 	<build>
 		<plugins>
-
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${spring-boot.version}</version>
 			</plugin>
-
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>${war.version}</version>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
-			</plugin>
-
 		</plugins>
 	</build>
-
 
 </project>
