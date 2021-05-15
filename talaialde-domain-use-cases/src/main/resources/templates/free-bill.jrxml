@@ -11,7 +11,7 @@
 	<parameter name="prop_client" class="java.lang.String"/>
 	<parameter name="prop_product" class="java.lang.String"/>
 	<parameter name="prop_value" class="java.lang.String"/>
-	<parameter name="client" class="es.dasaur.talaialde.management.clients.JpaClient"/>
+	<parameter name="client" class="es.danpintas.talaialde.management.clients.JpaClient"/>
 	<parameter name="startDate" class="java.util.Date"/>
 	<parameter name="endDate" class="java.util.Date"/>
 	<parameter name="billN" class="java.lang.String"/>
@@ -26,7 +26,7 @@
 	<parameter name="vat" class="java.lang.String"/>
 	<parameter name="date" class="java.util.Date"/>
 	<field name="lineDate" class="java.util.Date"/>
-	<field name="client" class="es.dasaur.talaialde.management.clients.JpaClient"/>
+	<field name="client" class="es.danpintas.talaialde.management.clients.JpaClient"/>
 	<field name="product" class="java.lang.String"/>
 	<field name="value" class="java.math.BigDecimal"/>
 	<background>
