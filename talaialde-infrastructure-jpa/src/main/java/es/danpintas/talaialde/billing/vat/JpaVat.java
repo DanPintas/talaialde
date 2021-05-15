@@ -8,9 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import lombok.Data;
 
 @Entity
 @Table(name = "vat")
+@Data
 public class JpaVat {
     
     @Id
@@ -19,21 +21,5 @@ public class JpaVat {
     
     @NotNull
     private BigDecimal value;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public BigDecimal getValue() {
-        return value;
-    }
-
-    public void setValue(BigDecimal value) {
-        this.value = value;
-    }
 
 }
