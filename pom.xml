@@ -17,27 +17,16 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<project.encoding>UTF-8</project.encoding>
-
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
-
+		<project.encoding>UTF-8</project.encoding>
 		<project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
 		<project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
+		<spring-boot.version>2.4.4</spring-boot.version>
+		<jasperreports.version>5.6.1</jasperreports.version>
+		<vaadin.version>8.13.0</vaadin.version>
 
 		<war.version>2.6</war.version>
-
-		<commons-lang3.version>3.4</commons-lang3.version>
-
-		<spring-boot.version>2.4.4</spring-boot.version>
-
-		<validation-api.version>1.1.0.Final</validation-api.version>
-		<el.version>3.0.0</el.version>
-
-		<vaadin.version>7.7.17</vaadin.version>
-		<vaadin-spring.version>1.2.0</vaadin-spring.version>
-		<jasperreports.version>5.6.1</jasperreports.version>
-
 	</properties>
 
 	<dependencyManagement>
@@ -65,9 +54,11 @@
 			</dependency>
 
 			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-lang3</artifactId>
-				<version>${commons-lang3.version}</version>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 
 			<dependency>
@@ -82,54 +73,11 @@
 			</dependency>
 
 			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${spring-boot.version}</version>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-bom</artifactId>
+				<version>${vaadin.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>javax.validation</groupId>
-				<artifactId>validation-api</artifactId>
-				<version>${validation-api.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.el</groupId>
-				<artifactId>javax.el-api</artifactId>
-				<version>${el.version}</version>
-			</dependency>
-
-
-			<dependency>
-				<groupId>com.vaadin</groupId>
-				<artifactId>vaadin-spring-boot-starter</artifactId>
-				<version>${vaadin-spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.vaadin</groupId>
-				<artifactId>vaadin-client-compiled</artifactId>
-				<version>${vaadin.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.vaadin</groupId>
-				<artifactId>vaadin-server</artifactId>
-				<version>${vaadin.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.vaadin</groupId>
-				<artifactId>vaadin-shared</artifactId>
-				<version>${vaadin.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.vaadin</groupId>
-				<artifactId>vaadin-themes</artifactId>
-				<version>${vaadin.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.vaadin</groupId>
-				<artifactId>vaadin-push</artifactId>
-				<version>${vaadin.version}</version>
 			</dependency>
 
 		</dependencies>

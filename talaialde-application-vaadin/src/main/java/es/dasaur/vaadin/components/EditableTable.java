@@ -1,5 +1,8 @@
 package es.dasaur.vaadin.components;
 
+import com.vaadin.v7.data.Property.ValueChangeListener;
+import com.vaadin.v7.ui.Table;
+import com.vaadin.v7.ui.TextField;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,15 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 
-import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Table;
-import com.vaadin.ui.Table.ColumnGenerator;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -99,6 +98,7 @@ public class EditableTable<T>
         lowerActions.setSpacing(true);
         
         VerticalLayout tableLayout = new VerticalLayout(upperActions, table, lowerActions);
+        tableLayout.setMargin(false);
         tableLayout.setSizeFull();
         tableLayout.setSpacing(true);
         tableLayout.setComponentAlignment(upperActions, Alignment.TOP_RIGHT);
@@ -178,7 +178,7 @@ public class EditableTable<T>
         return (T) table.getValue();
     }
 
-    public final void addGeneratedColumn(Object id, ColumnGenerator generatedColumn) {
+    public final void addGeneratedColumn(Object id, Table.ColumnGenerator generatedColumn) {
         table.addGeneratedColumn(id, generatedColumn);
     }
 

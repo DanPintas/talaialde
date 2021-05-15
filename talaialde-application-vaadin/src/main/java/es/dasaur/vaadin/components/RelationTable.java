@@ -1,5 +1,6 @@
 package es.dasaur.vaadin.components;
 
+import com.vaadin.v7.ui.Table;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,7 +8,6 @@ import java.util.Map;
 
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.Table;
 
 public class RelationTable<C, R> extends CustomComponent {
     

@@ -1,20 +1,20 @@
 package es.dasaur.talaialde.components;
 
+import com.vaadin.v7.data.fieldgroup.FieldGroup.CommitException;
+import com.vaadin.v7.ui.Table;
+import com.vaadin.v7.ui.TextField;
+import es.dasaur.vaadin.components.SearchableBeanItemContainer;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
-import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
-import com.vaadin.ui.Table;
-import com.vaadin.ui.Table.ColumnGenerator;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
@@ -22,7 +22,6 @@ import com.vaadin.ui.themes.ValoTheme;
 import es.dasaur.vaadin.components.BeanForm;
 import es.dasaur.vaadin.components.BeanForm.BeanFormTextSupplier;
 import es.dasaur.vaadin.components.ConfirmWindow;
-import es.dasaur.vaadin.components.SearchableBeanItemContainer;
 import es.dasaur.vaadin.utils.NotificationUtils;
 
 public class MasterDetail<T> extends CustomComponent {
@@ -138,12 +137,14 @@ public class MasterDetail<T> extends CustomComponent {
         detailLowerActions.setSpacing(true);
         
         VerticalLayout vlMaster = new VerticalLayout(tfSearch, master);
+        vlMaster.setMargin(false);
         vlMaster.setSizeFull();
         vlMaster.setSpacing(true);
         vlMaster.setExpandRatio(master, 1);
         
         VerticalLayout vlDetail = new VerticalLayout(detailUpperActions, 
                 panelDetail, detailLowerActions);
+        vlDetail.setMargin(false);
         vlDetail.setSizeFull();
         vlDetail.setSpacing(true);
         vlDetail.setExpandRatio(panelDetail, 1f);
@@ -267,7 +268,7 @@ public class MasterDetail<T> extends CustomComponent {
         detail.setFieldCaptions(fieldCaptions);
     }
 
-    public void addGeneratedColumn(Object id, ColumnGenerator generatedColumn){
+    public void addGeneratedColumn(Object id, Table.ColumnGenerator generatedColumn){
         master.addGeneratedColumn(id, generatedColumn);
     }
 

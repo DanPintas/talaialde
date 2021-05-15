@@ -1,12 +1,11 @@
 package es.dasaur.vaadin.components;
 
+import com.vaadin.v7.data.Item;
+import com.vaadin.v7.data.Property;
+import com.vaadin.v7.data.util.BeanItemContainer;
 import java.util.Arrays;
 
 import org.springframework.util.StringUtils;
-
-import com.vaadin.data.Item;
-import com.vaadin.data.Property;
-import com.vaadin.data.util.BeanItemContainer;
 
 public class SearchableBeanItemContainer<T> 
         extends BeanItemContainer<T> {
@@ -68,7 +67,7 @@ public class SearchableBeanItemContainer<T>
             
             boolean passesFilter = false;
             
-            Property<?> property = 
+            Property<?> property =
                     item.getItemProperty(searchablePropertyId);
             if (property != null) {
                 Object propertyValue = property.getValue();

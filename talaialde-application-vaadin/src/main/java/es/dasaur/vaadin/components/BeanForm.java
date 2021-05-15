@@ -1,5 +1,19 @@
 package es.dasaur.vaadin.components;
 
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Component;
+import com.vaadin.ui.CustomComponent;
+import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
+import com.vaadin.v7.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.v7.data.fieldgroup.DefaultFieldGroupFieldFactory;
+import com.vaadin.v7.data.fieldgroup.FieldGroup.CommitException;
+import com.vaadin.v7.ui.AbstractField;
+import com.vaadin.v7.ui.AbstractTextField;
+import com.vaadin.v7.ui.ComboBox;
+import com.vaadin.v7.ui.Field;
+import com.vaadin.v7.ui.TextArea;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -18,21 +32,6 @@ import javax.validation.constraints.NotNull;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
-import com.vaadin.data.fieldgroup.DefaultFieldGroupFieldFactory;
-import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
-import com.vaadin.ui.AbstractField;
-import com.vaadin.ui.AbstractTextField;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.ComboBox;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.Field;
-import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.TextArea;
 
 import es.dasaur.talaialde.annotations.LongText;
 
@@ -229,7 +228,7 @@ public class BeanForm<T> extends CustomComponent {
         
         GridLayout row = columns.get(nColumns);
         
-        Label label = new Label(captionList == null ? 
+        Label label = new Label(captionList == null ?
                 field.getCaption() : captionList.get(i));
         label.setWidth(10 * label.getValue().length(), Unit.PIXELS);
         row.addComponent(label);
@@ -276,7 +275,7 @@ public class BeanForm<T> extends CustomComponent {
     @Override
     public void setReadOnly(boolean b) {
         readOnly = b;
-        fieldList.forEach(f -> f.setReadOnly(readOnly));
+        fieldList.forEach(f -> f.setEnabled(!readOnly));
     }
     
     public void setLinkMap(Map<String, Supplier<Map<?, String>>> linkMap) {

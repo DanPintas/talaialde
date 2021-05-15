@@ -2,6 +2,8 @@ package es.dasaur.talaialde.users;
 
 import static es.dasaur.talaialde.constants.Messages.*;
 
+import com.vaadin.v7.ui.PasswordField;
+import com.vaadin.v7.ui.TextField;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.util.StringUtils;
@@ -12,8 +14,6 @@ import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.PasswordField;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
@@ -21,8 +21,6 @@ import com.vaadin.ui.themes.ValoTheme;
 import es.dasaur.talaialde.VaadinUI;
 import es.dasaur.talaialde.constants.ConstantesEstilo;
 import es.dasaur.talaialde.main.components.AppLogo;
-import es.dasaur.talaialde.users.LoginPresenter;
-import es.dasaur.talaialde.users.LoginView;
 import es.dasaur.vaadin.mvp.VaadinAbstractView;
 import es.dasaur.vaadin.utils.NotificationUtils;
 
@@ -38,12 +36,14 @@ public class LoginViewImpl extends VaadinAbstractView<LoginPresenter>
         Component login = buildLoginForm();
 
         VerticalLayout content = new VerticalLayout();
+        content.setMargin(false);
         content.setSizeFull();
 
         content.addComponent(login);
         content.setComponentAlignment(login, Alignment.MIDDLE_CENTER);
 
         VerticalLayout vlLoginWrapper = new VerticalLayout(content);
+        vlLoginWrapper.setMargin(false);
         vlLoginWrapper.setComponentAlignment(content, Alignment.MIDDLE_CENTER);
         vlLoginWrapper.setSizeFull();
 
@@ -53,6 +53,7 @@ public class LoginViewImpl extends VaadinAbstractView<LoginPresenter>
 
     private Component buildLoginForm() {
         final VerticalLayout loginPanel = new VerticalLayout();
+        loginPanel.setMargin(false);
 
         loginPanel.setSizeUndefined();
         loginPanel.setMargin(true);
@@ -94,6 +95,7 @@ public class LoginViewImpl extends VaadinAbstractView<LoginPresenter>
 
         final VerticalLayout fields = new VerticalLayout(username, password,
                 signin);
+        fields.setMargin(false);
         fields.setSpacing(true);
 
         fields.setComponentAlignment(username, Alignment.BOTTOM_CENTER);

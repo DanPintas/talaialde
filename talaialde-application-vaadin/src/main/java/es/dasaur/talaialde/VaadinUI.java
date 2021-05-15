@@ -2,6 +2,7 @@ package es.dasaur.talaialde;
 
 import static es.dasaur.talaialde.constants.Messages.APP_TITLE;
 
+import com.vaadin.annotations.Widgetset;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ import es.dasaur.talaialde.users.security.SecurityUtils;
 @Theme("mytheme")
 @Push(value = PushMode.MANUAL, transport=Transport.WEBSOCKET_XHR)
 @PropertySource("classpath:application.properties")
+@Widgetset("com.vaadin.v7.Vaadin7WidgetSet")
 public class VaadinUI extends UI {
     
     private static final long serialVersionUID = 9119967750005352962L;

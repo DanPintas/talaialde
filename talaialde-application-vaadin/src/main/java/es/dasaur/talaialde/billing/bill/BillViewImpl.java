@@ -1,5 +1,12 @@
 package es.dasaur.talaialde.billing.bill;
 
+import com.vaadin.v7.data.util.BeanItemContainer;
+import com.vaadin.v7.shared.ui.combobox.FilteringMode;
+import com.vaadin.v7.shared.ui.datefield.Resolution;
+import com.vaadin.v7.ui.ComboBox;
+import com.vaadin.v7.ui.DateField;
+import com.vaadin.v7.ui.Table;
+import com.vaadin.v7.ui.TextField;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -10,20 +17,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.StreamResource;
-import com.vaadin.shared.ui.combobox.FilteringMode;
-import com.vaadin.shared.ui.datefield.Resolution;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CheckBox;
-import com.vaadin.ui.ComboBox;
-import com.vaadin.ui.DateField;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Table;
-import com.vaadin.ui.Table.Align;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
@@ -224,8 +223,8 @@ public class BillViewImpl
         table.setVisibleColumns(VISIBLE_COLUMNS.toArray());
         table.setColumnWidth(JpaLine.PROP_CHECKED, 40);
         table.setColumnWidth(JpaLine.PROP_CHECKED, 100);
-        table.setColumnAlignment(FEE, Align.RIGHT);
-        table.setColumnAlignment(JpaLine.PROP_VALUE, Align.RIGHT);
+        table.setColumnAlignment(FEE, Table.Align.RIGHT);
+        table.setColumnAlignment(JpaLine.PROP_VALUE, Table.Align.RIGHT);
     }
     
     private Object generateColumn(Object itemId, Object propertyId) {

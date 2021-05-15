@@ -16,8 +16,6 @@ import com.vaadin.ui.TabSheet.Tab;
 
 import es.dasaur.mvp.Presenter;
 import es.dasaur.mvp.View;
-import es.dasaur.talaialde.main.MainPresenter;
-import es.dasaur.talaialde.main.MainView;
 import es.dasaur.talaialde.main.components.MainBar;
 import es.dasaur.talaialde.main.components.PanelPrincipal;
 import es.dasaur.talaialde.users.security.SecurityUtils;
@@ -40,12 +38,15 @@ public class MainViewImpl
     @Override
     public final void init() {
         VerticalLayout vlMain = new VerticalLayout();
+        vlMain.setMargin(false);
+        vlMain.setSpacing(false);
         vlMain.setHeight("100%");
         
-        MainPresenter mainPresenter = (MainPresenter) presenter();
+        MainPresenter mainPresenter = presenter();
         MenuBar menu = new MainBar(mainPresenter);
         HorizontalLayout hlMenuBar = new HorizontalLayout(
                 menu, getBotonCerrarSesion());
+        hlMenuBar.setSpacing(false);
         hlMenuBar.setWidth("100%");
         hlMenuBar.setExpandRatio(menu, 1.0f);
         vlMain.addComponent(hlMenuBar);
@@ -61,6 +62,7 @@ public class MainViewImpl
         vlMain.setExpandRatio(panelPrincipal, 1.0f);
         
         VerticalLayout vlMainWrapper = new VerticalLayout(vlMain);
+        vlMainWrapper.setMargin(false);
         vlMainWrapper.setComponentAlignment(vlMain, Alignment.TOP_CENTER);
         vlMainWrapper.setSizeFull();
         
