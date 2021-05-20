@@ -1,8 +1,8 @@
 package es.danpintas.talaialde.billing.freeline;
 
+import es.danpintas.talaialde.management.clients.JpaClient;
 import java.math.BigDecimal;
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -13,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import es.danpintas.talaialde.management.clients.JpaClient;
 import lombok.Data;
 
 @Entity
@@ -22,35 +20,40 @@ import lombok.Data;
 @Data
 public class JpaFreeLine {
 
-    public static final String PROP_CLIENT = "client";
-    public static final String PROP_DATE = "lineDate";
-    public static final String PROP_PRODUCT = "product";
-    public static final String PROP_SPECIFICS = "specifics";
-    public static final String PROP_VALUE = "value";
-    public static final String PROP_CHECKED = "checked";
+  public static final String PROP_CLIENT = "client";
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  public static final String PROP_DATE = "lineDate";
 
-    @JoinColumn(name = "id_client")
-    @ManyToOne(fetch = FetchType.EAGER)
-    @NotNull
-    private JpaClient client;
+  public static final String PROP_PRODUCT = "product";
 
-    @NotNull
-    private Date lineDate = new Date();
+  public static final String PROP_SPECIFICS = "specifics";
 
-    @NotNull
-    @Size(max = 255)
-    private String product;
+  public static final String PROP_VALUE = "value";
 
-    @Size(max = 4000)
-    private String specifics;
+  public static final String PROP_CHECKED = "checked";
 
-    @NotNull
-    private BigDecimal value;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    private transient boolean checked;
+  @JoinColumn(name = "id_client")
+  @ManyToOne(fetch = FetchType.EAGER)
+  @NotNull
+  private JpaClient client;
+
+  @NotNull
+  private Date lineDate = new Date();
+
+  @NotNull
+  @Size(max = 255)
+  private String product;
+
+  @Size(max = 4000)
+  private String specifics;
+
+  @NotNull
+  private BigDecimal value;
+
+  private transient boolean checked;
 
 }

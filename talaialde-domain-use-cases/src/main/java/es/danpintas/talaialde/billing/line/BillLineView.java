@@ -2,9 +2,9 @@ package es.danpintas.talaialde.billing.line;
 
 import es.danpintas.mvp.View;
 
-public interface BillLineView 
-        extends View<BillLinePresenter> {
+public interface BillLineView
+    extends View<BillLinePresenter> {
 
-    void setLine(JpaLine line);
+  void setLine(JpaLine line);
 
 }

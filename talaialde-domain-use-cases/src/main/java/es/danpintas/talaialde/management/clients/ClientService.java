@@ -4,12 +4,11 @@ import java.util.List;
 
 public interface ClientService {
 
-    List<JpaClient> findAllClients();
+  List<JpaClient> findAllClients();
 
-    JpaClient saveClient(JpaClient c);
+  JpaClient saveClient(JpaClient c);
 
-    void removeClient(JpaClient c);
-    
-    
+  void removeClient(JpaClient c);
+
 
 }

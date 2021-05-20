@@ -13,13 +13,13 @@ import lombok.Data;
 @Table(name = "role")
 @Data
 public class JpaRole {
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
-    
-    @NotNull
-    @Size(max=255)
-    private String name;
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @NotNull
+  @Size(max = 255)
+  private String name;
 
 }

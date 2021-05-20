@@ -2,22 +2,22 @@ package es.danpintas.mvp;
 
 import es.danpintas.talaialde.main.MainPresenter;
 
-public interface Presenter 
-        <M, V extends View<? extends Presenter<M,V>>> {
+public interface Presenter
+    <M, V extends View<? extends Presenter<M, V>>> {
 
-    M model();
-    
-    V view();
+  M model();
 
-    void init();
-    
-    String getMessage(String id, Object... args);
+  V view();
 
-    String getTitle();
-    
-    void setTitle(String title);
+  void init();
 
-    MainPresenter getMainPresenter();
+  String getMessage(String id, Object... args);
 
-    void setMainPresenter(MainPresenter mainPresenter);
+  String getTitle();
+
+  void setTitle(String title);
+
+  MainPresenter getMainPresenter();
+
+  void setMainPresenter(MainPresenter mainPresenter);
 }

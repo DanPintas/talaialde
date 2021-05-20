@@ -13,23 +13,23 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
-@Table(name = "rel_role_auth", uniqueConstraints = 
-        @UniqueConstraint(columnNames = {"id_role", "id_auth"}))
+@Table(name = "rel_role_auth", uniqueConstraints =
+@UniqueConstraint(columnNames = {"id_role", "id_auth"}))
 @Data
 public class JpaRelRoleAuth {
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
-    
-    @JoinColumn(name="id_role")
-    @ManyToOne(fetch=FetchType.EAGER)
-    @NotNull
-    private JpaRole role;
 
-    @JoinColumn(name="id_auth")
-    @ManyToOne(fetch=FetchType.EAGER)
-    @NotNull
-    private JpaAuth auth;
-    
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @JoinColumn(name = "id_role")
+  @ManyToOne(fetch = FetchType.EAGER)
+  @NotNull
+  private JpaRole role;
+
+  @JoinColumn(name = "id_auth")
+  @ManyToOne(fetch = FetchType.EAGER)
+  @NotNull
+  private JpaAuth auth;
+
 }

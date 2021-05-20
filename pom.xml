@@ -1,70 +1,64 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>es.danpintas</groupId>
-	<artifactId>talaialde</artifactId>
-	<version>2.0.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<name>Talaialde</name>
-	<description>Aplicación de gestión de Hormigones Talaialde</description>
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>es.danpintas</groupId>
+  <artifactId>talaialde</artifactId>
+  <version>2.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Talaialde</name>
+  <description>Aplicación de gestión de Hormigones Talaialde</description>
 
-	<modules>
-		<module>talaialde-domain-base</module>
-		<module>talaialde-infrastructure-jpa</module>
-		<module>talaialde-domain-use-cases</module>
-		<module>talaialde-application-vaadin</module>
-		<module>talaialde-domain-out</module>
-	</modules>
+  <modules>
+    <module>talaialde-domain-base</module>
+    <module>talaialde-infrastructure-jpa</module>
+    <module>talaialde-domain-use-cases</module>
+    <module>talaialde-application-vaadin</module>
+    <module>talaialde-domain-out</module>
+  </modules>
 
-	<properties>
-		<java.version>11</java.version>
-		<maven.compiler.source>${java.version}</maven.compiler.source>
-		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<project.encoding>UTF-8</project.encoding>
-		<project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
-		<project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
-		<spring-boot.version>2.4.4</spring-boot.version>
-		<jasperreports.version>5.6.1</jasperreports.version>
-		<vaadin.version>8.13.0</vaadin.version>
-	</properties>
+  <properties>
+    <java.version>11</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <project.encoding>UTF-8</project.encoding>
+    <project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
+    <project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
+    <spring-boot.version>2.4.4</spring-boot.version>
+    <jasperreports.version>5.6.1</jasperreports.version>
+    <vaadin.version>8.13.0</vaadin.version>
+  </properties>
 
-	<dependencyManagement>
-		<dependencies>
+  <dependencyManagement>
+    <dependencies>
 
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${spring-boot.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
 
-			<dependency>
-				<groupId>org.projectlombok</groupId>
-				<artifactId>lombok</artifactId>
-				<scope>provided</scope>
-			</dependency>
+      <dependency>
+        <groupId>net.sf.jasperreports</groupId>
+        <artifactId>jasperreports</artifactId>
+        <version>${jasperreports.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.sf.jasperreports</groupId>
+        <artifactId>jasperreports-fonts</artifactId>
+        <version>${jasperreports.version}</version>
+      </dependency>
 
-			<dependency>
-				<groupId>net.sf.jasperreports</groupId>
-				<artifactId>jasperreports</artifactId>
-				<version>${jasperreports.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>net.sf.jasperreports</groupId>
-				<artifactId>jasperreports-fonts</artifactId>
-				<version>${jasperreports.version}</version>
-			</dependency>
+      <dependency>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-bom</artifactId>
+        <version>${vaadin.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
 
-			<dependency>
-				<groupId>com.vaadin</groupId>
-				<artifactId>vaadin-bom</artifactId>
-				<version>${vaadin.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-
-		</dependencies>
-	</dependencyManagement>
+    </dependencies>
+  </dependencyManagement>
 
 </project>

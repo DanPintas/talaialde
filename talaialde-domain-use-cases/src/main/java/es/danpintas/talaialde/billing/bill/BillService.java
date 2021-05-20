@@ -1,27 +1,26 @@
 package es.danpintas.talaialde.billing.bill;
 
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-
 import es.danpintas.talaialde.billing.line.JpaLine;
 import es.danpintas.talaialde.management.clients.JpaClient;
 import es.danpintas.talaialde.management.routes.JpaRoute;
 import es.danpintas.talaialde.management.tractors.JpaTractor;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 
 public interface BillService {
 
-    List<JpaLine> getLines(JpaClient client, JpaRoute route, JpaTractor tractor,
-                           Date startDate, Date endDate);
+  List<JpaLine> getLines(JpaClient client, JpaRoute route, JpaTractor tractor,
+      Date startDate, Date endDate);
 
-    List<JpaClient> getClients();
+  List<JpaClient> getClients();
 
-    List<JpaRoute> getRoutes();
+  List<JpaRoute> getRoutes();
 
-    List<JpaTractor> getTractors();
+  List<JpaTractor> getTractors();
 
-    BigDecimal getDefaultVat();
+  BigDecimal getDefaultVat();
 
-    void deleteLine(JpaLine line);
+  void deleteLine(JpaLine line);
 
 }

@@ -4,12 +4,11 @@ import java.util.List;
 
 public interface TractorService {
 
-    List<JpaTractor> findAllTractors();
+  List<JpaTractor> findAllTractors();
 
-    JpaTractor saveTractor(JpaTractor c);
+  JpaTractor saveTractor(JpaTractor c);
 
-    void removeTractor(JpaTractor c);
-    
-    
+  void removeTractor(JpaTractor c);
+
 
 }

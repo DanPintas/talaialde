@@ -1,16 +1,15 @@
 package es.danpintas.talaialde.management.clients;
 
+import es.danpintas.mvp.Presenter;
 import java.util.List;
 
-import es.danpintas.mvp.Presenter;
+public interface ClientPresenter
+    extends Presenter<ClientService, ClientView> {
 
-public interface ClientPresenter 
-        extends Presenter<ClientService, ClientView> {
+  List<JpaClient> findAllClients();
 
-    List<JpaClient> findAllClients();
+  JpaClient saveClient(JpaClient c);
 
-    JpaClient saveClient(JpaClient c);
-
-    void removeClient(JpaClient c);
+  void removeClient(JpaClient c);
 
 }

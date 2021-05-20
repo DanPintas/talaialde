@@ -1,13 +1,12 @@
 package es.danpintas.talaialde.billing.freeline;
 
-import java.util.List;
-
 import es.danpintas.talaialde.management.clients.JpaClient;
+import java.util.List;
 
 public interface FreeBillLineService {
 
-    JpaFreeLine saveLine(JpaFreeLine c);
+  JpaFreeLine saveLine(JpaFreeLine c);
 
-    List<JpaClient> getClients();
+  List<JpaClient> getClients();
 
 }

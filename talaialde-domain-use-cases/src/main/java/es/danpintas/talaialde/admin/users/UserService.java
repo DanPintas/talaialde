@@ -4,12 +4,12 @@ import java.util.List;
 
 public interface UserService {
 
-    List<JpaUser> findAllUsers();
-    
-    JpaUser saveUser(JpaUser user);
+  List<JpaUser> findAllUsers();
 
-    List<JpaRole> getRoles();
+  JpaUser saveUser(JpaUser user);
 
-    void deleteUser(JpaUser u);
-    
+  List<JpaRole> getRoles();
+
+  void deleteUser(JpaUser u);
+
 }

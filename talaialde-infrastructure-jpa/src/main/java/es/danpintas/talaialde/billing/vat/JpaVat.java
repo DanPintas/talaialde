@@ -1,7 +1,6 @@
 package es.danpintas.talaialde.billing.vat;
 
 import java.math.BigDecimal;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,12 +13,12 @@ import lombok.Data;
 @Table(name = "vat")
 @Data
 public class JpaVat {
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
-    
-    @NotNull
-    private BigDecimal value;
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @NotNull
+  private BigDecimal value;
 
 }

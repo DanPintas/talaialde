@@ -1,19 +1,18 @@
 package es.danpintas.talaialde.billing.line;
 
-import java.util.List;
-
 import es.danpintas.talaialde.management.clients.JpaClient;
 import es.danpintas.talaialde.management.routes.JpaRoute;
 import es.danpintas.talaialde.management.tractors.JpaTractor;
+import java.util.List;
 
 public interface BillLineService {
 
-    JpaLine saveLine(JpaLine c);
+  JpaLine saveLine(JpaLine c);
 
-    List<JpaClient> getClients();
+  List<JpaClient> getClients();
 
-    List<JpaRoute> getRoutes();
+  List<JpaRoute> getRoutes();
 
-    List<JpaTractor> getTractors();
+  List<JpaTractor> getTractors();
 
 }

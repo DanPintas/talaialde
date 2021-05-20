@@ -1,19 +1,18 @@
 package es.danpintas.talaialde.admin.users;
 
+import es.danpintas.mvp.Presenter;
 import java.util.List;
 import java.util.Map;
 
-import es.danpintas.mvp.Presenter;
+public interface UserPresenter
+    extends Presenter<UserService, UserView> {
 
-public interface UserPresenter 
-        extends Presenter<UserService, UserView> {
+  List<JpaUser> findAllUsers();
 
-    List<JpaUser> findAllUsers();
-    
-    JpaUser saveUser(JpaUser u);
-    
-    void deleteUser(JpaUser u);
-    
-    Map<JpaRole, String> getRoleMap();
+  JpaUser saveUser(JpaUser u);
+
+  void deleteUser(JpaUser u);
+
+  Map<JpaRole, String> getRoleMap();
 
 }

@@ -13,13 +13,13 @@ import lombok.Data;
 @Table(name = "auth")
 @Data
 public class JpaAuth {
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
-    
-    @NotNull
-    @Size(max=255)
-    private String name;
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @NotNull
+  @Size(max = 255)
+  private String name;
 
 }

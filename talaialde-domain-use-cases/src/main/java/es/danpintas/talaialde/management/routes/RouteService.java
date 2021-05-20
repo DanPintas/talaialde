@@ -4,12 +4,11 @@ import java.util.List;
 
 public interface RouteService {
 
-    List<JpaRoute> findAllRoutes();
+  List<JpaRoute> findAllRoutes();
 
-    JpaRoute saveRoute(JpaRoute c);
+  JpaRoute saveRoute(JpaRoute c);
 
-    void removeRoute(JpaRoute c);
-    
-    
+  void removeRoute(JpaRoute c);
+
 
 }

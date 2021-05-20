@@ -1,17 +1,16 @@
 package es.danpintas.talaialde.billing.freeline;
 
-import java.util.List;
-
 import es.danpintas.mvp.Presenter;
 import es.danpintas.talaialde.management.clients.JpaClient;
+import java.util.List;
 
-public interface FreeBillLinePresenter 
-        extends Presenter<FreeBillLineService, FreeBillLineView> {
+public interface FreeBillLinePresenter
+    extends Presenter<FreeBillLineService, FreeBillLineView> {
 
-    JpaFreeLine saveLine(JpaFreeLine c);
+  JpaFreeLine saveLine(JpaFreeLine c);
 
-    List<JpaClient> getClients();
+  List<JpaClient> getClients();
 
-    void setLine(JpaFreeLine line);
+  void setLine(JpaFreeLine line);
 
 }

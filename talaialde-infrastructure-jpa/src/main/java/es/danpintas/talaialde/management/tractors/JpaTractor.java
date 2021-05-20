@@ -1,7 +1,6 @@
 package es.danpintas.talaialde.management.tractors;
 
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,25 +14,27 @@ import lombok.Data;
 @Table(name = "tractor")
 @Data
 public class JpaTractor {
-    
-    public static final String PROP_PLATE = "plate";
-    public static final String PROP_VI_EXPIRY = "vehicleInspectionExpiry";
-    public static final String PROP_USUAL_DRIVER = "usualDriver";
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
-    
-    @NotNull
-    private Boolean deleted = false;
-    
-    @NotNull
-    @Size(max=20)
-    private String plate;
-    
-    private Date vehicleInspectionExpiry;
-    
-    @Size(max=255)
-    private String usualDriver;
-    
+
+  public static final String PROP_PLATE = "plate";
+
+  public static final String PROP_VI_EXPIRY = "vehicleInspectionExpiry";
+
+  public static final String PROP_USUAL_DRIVER = "usualDriver";
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
+  @NotNull
+  private Boolean deleted = false;
+
+  @NotNull
+  @Size(max = 20)
+  private String plate;
+
+  private Date vehicleInspectionExpiry;
+
+  @Size(max = 255)
+  private String usualDriver;
+
 }
